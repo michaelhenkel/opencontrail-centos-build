@@ -74,6 +74,7 @@ AUTOINSTALL="yes"
 EOF
 sed -i "s#tools/packaging/common/control_files#tools/packages/rpm/contrail#g" contrail.spec
 sed -i "s#%{_distrorpmpkgdir}#%{_sbtop}/%{_distrorpmpkgdir}#g" contrail.spec  |grep _distrorpmpkgdir
-rpmbuild -ba --define "_sbtop $sbtop" contrail.spec
+JOBS=`nproc`
+SCONSFLAGS="-j $JOBS -Q debug=1" rpmbuild -ba --define "_sbtop $sbtop" contrail.spec
 
 ```
