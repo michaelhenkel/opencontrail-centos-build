@@ -9,13 +9,13 @@ ssh-add ${SSH_KEY:-"$HOME/.ssh/id_rsa"}
 wget --no-check-certificate -O /usr/bin/repo https://storage.googleapis.com/git-repo-downloads/repo
 chmod +x /usr/bin/repo
 CONTRAIL_VNC_REPO=git@github.com:Juniper/contrail-vnc.git
-CONTRAIL_BRANCH=R3.0
-CONTRAIL_VERSION=3.0.2
+#CONTRAIL_BRANCH=R3.0
 mkdir -p ~/contrail/build/libs
 cd ~/contrail/build
 grep github ~/.ssh/known_hosts || ssh-keyscan github.com >> ~/.ssh/known_hosts
 git config --global user.email "michael.henkel@gmail.com"
-repo init -u $CONTRAIL_VNC_REPO -b $CONTRAIL_BRANCH
+#repo init -u $CONTRAIL_VNC_REPO -b $CONTRAIL_BRANCH
+repo init -u $CONTRAIL_VNC_REPO 
 repo sync
 cd libs
 wget http://sourceforge.net/projects/libipfix/files/libipfix/libipfix_110209.tgz
@@ -45,18 +45,18 @@ cd ~/contrail/build/third_party
 python fetch_packages.py
 cd ..
 
-cd controller/
-git checkout 09e5d48c3b256d361558413ed9befb2dfee9484c
-cd ../vrouter/
-git checkout 4692505afeb6e968a98fe58bc0b901f5df2bcff3
-cd ../contrail-web-controller/
-git checkout 3fe8b5d4c18a2fd97dc5296144cd242884c8a728
-cd ../openstack/contrail-heat/
-git checkout a5a36a22e6862f9e3c76a9864175815ead0501bd
-cd ../../contrail-web-core
-git checkout 7b592db58b5cc6aba5524e032d151389d4183aec
-cd ../tools/sandesh
-git checkout 440c5a58ad09f613419e1ba67bdd0acb688d21bc
+#cd controller/
+#git checkout 09e5d48c3b256d361558413ed9befb2dfee9484c
+#cd ../vrouter/
+#git checkout 4692505afeb6e968a98fe58bc0b901f5df2bcff3
+#cd ../contrail-web-controller/
+#git checkout 3fe8b5d4c18a2fd97dc5296144cd242884c8a728
+#cd ../openstack/contrail-heat/
+#git checkout a5a36a22e6862f9e3c76a9864175815ead0501bd
+#cd ../../contrail-web-core
+#git checkout 7b592db58b5cc6aba5524e032d151389d4183aec
+#cd ../tools/sandesh
+#git checkout 440c5a58ad09f613419e1ba67bdd0acb688d21bc
 export sbtop=~/contrail/build/
 cd ../packages/rpm/contrail
 kver=`uname -a |awk '{print $3}'`
