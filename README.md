@@ -2,7 +2,7 @@
 
 ```
 yum install -y epel-release
-yum install -y rpm-build scons git python-lxml wget gcc patch make unzip flex bison gcc-c++ openssl-devel autoconf automake vim python-devel python-setuptools protobuf protobuf-devel protobuf-compiler net-snmp-python bzip2 boost-devel tbb-devel  libcurl-devel libxml2-devel zlib-devel cppunit-devel cyrus-sasl-devel.x86_64 cyrus-sasl-lib.x86_64 openssl-devel  cyrus-sasl.x86_64 python-sphinx.noarch
+yum install -y rpm-build scons git python-lxml wget gcc patch make unzip flex bison gcc-c++ openssl-devel autoconf automake vim python-devel python-setuptools protobuf protobuf-devel protobuf-compiler net-snmp-python bzip2 boost-devel tbb-devel  libcurl-devel libxml2-devel zlib-devel cppunit-devel cyrus-sasl-devel.x86_64 cyrus-sasl-lib.x86_64 openssl-devel  cyrus-sasl.x86_64 python-sphinx.noarch kernel-devel
 eval "$(ssh-agent -s)"
 ssh-add ${SSH_KEY:-"$HOME/.ssh/id_rsa"}
 wget --no-check-certificate -O /usr/bin/repo https://storage.googleapis.com/git-repo-downloads/repo
@@ -45,6 +45,8 @@ python fetch_packages.py
 cd ..
 export sbtop=~/contrail/build/
 cd tools/packages/rpm/contrail
+kver=`uname -a |awk '{print $3}'`
+sed -i "/3.10.0-327.10.1.el7.x86_64/ s/$/ $kver/" contrail.spec
 rpmbuild -ba --define "_sbtop $sbtop" contrail.spec
 
 ```
