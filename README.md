@@ -55,8 +55,10 @@ cd ../openstack/contrail-heat/
 git checkout a5a36a22e6862f9e3c76a9864175815ead0501bd
 cd ../../contrail-web-core
 git checkout 7b592db58b5cc6aba5524e032d151389d4183aec
+cd ../tools/sandesh
+git checkout 440c5a58ad09f613419e1ba67bdd0acb688d21bc
 export sbtop=~/contrail/build/
-cd ../tools/packages/rpm/contrail
+cd ../packages/rpm/contrail
 kver=`uname -a |awk '{print $3}'`
 sed -i "/3.10.0-327.10.1.el7.x86_64/ s/$/ $kver/" contrail.spec
 ln -s /usr/src/kernels/3.10.0-327.22.2.el7.x86_64 /usr/src/kernels/3.10.0-327.el7.x86_64 #check your kernel version in /usr/src/kernels
