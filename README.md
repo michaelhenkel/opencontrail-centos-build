@@ -48,6 +48,17 @@ cd tools/packages/rpm/contrail
 kver=`uname -a |awk '{print $3}'`
 sed -i "/3.10.0-327.10.1.el7.x86_64/ s/$/ $kver/" contrail.spec
 ln -s /usr/src/kernels/3.10.0-327.22.2.el7.x86_64 /usr/src/kernels/3.10.0-327.el7.x86_64 #check your kernel version in /usr/src/kernels
+cat <<EOF > dkms.conf.in
+PACKAGE_NAME=vrouter
+PACKAGE_VERSION="__VERSION__"
+PRE_BUILD="utils/dkms/gen_build_info.sh __VERSION__ $dkms_tree/vrouter/__VERSION__/build"
+MAKE[0]="'make' -C . KERNELDIR=/lib/modules/${kernelver}/build"
+CLEAN[0]="'make' -C . KERNELDIR=/lib/modules/${kernelver}/build"
+BUILT_MODULE_NAME[0]="vrouter"
+DEST_MODULE_LOCATION[0]="/kernel/net/vrouter"
+AUTOINSTALL="yes"
+EOF
+sed -i "s#tools/packaging/common/control_files#tools/packages/rpm/contrail#g" contrail.spec
 rpmbuild -ba --define "_sbtop $sbtop" contrail.spec
 
 ```
