@@ -47,6 +47,7 @@ export sbtop=~/contrail/build/
 cd tools/packages/rpm/contrail
 kver=`uname -a |awk '{print $3}'`
 sed -i "/3.10.0-327.10.1.el7.x86_64/ s/$/ $kver/" contrail.spec
+ln -s /usr/src/kernels/3.10.0-327.22.2.el7.x86_64 /usr/src/kernels/3.10.0-327.el7.x86_64 #check your kernel version in /usr/src/kernels
 rpmbuild -ba --define "_sbtop $sbtop" contrail.spec
 
 ```
