@@ -43,8 +43,19 @@ rpm -i ~/rpmbuild/RPMS/x86_64/libzookeeper-3.4.8-1.x86_64.rpm ~/rpmbuild/RPMS/x8
 cd ~/contrail/build/third_party
 python fetch_packages.py
 cd ..
+
+cd controller/
+git checkout 09e5d48c3b256d361558413ed9befb2dfee9484c
+cd ../vrouter/
+git checkout 4692505afeb6e968a98fe58bc0b901f5df2bcff3
+cd ../contrail-web-controller/
+git checkout 3fe8b5d4c18a2fd97dc5296144cd242884c8a728
+cd ../openstack/contrail-heat/
+git checkout a5a36a22e6862f9e3c76a9864175815ead0501bd
+cd ../../contrail-web-core
+git checkout 7b592db58b5cc6aba5524e032d151389d4183aec
 export sbtop=~/contrail/build/
-cd tools/packages/rpm/contrail
+cd ../tools/packages/rpm/contrail
 kver=`uname -a |awk '{print $3}'`
 sed -i "/3.10.0-327.10.1.el7.x86_64/ s/$/ $kver/" contrail.spec
 ln -s /usr/src/kernels/3.10.0-327.22.2.el7.x86_64 /usr/src/kernels/3.10.0-327.el7.x86_64 #check your kernel version in /usr/src/kernels
