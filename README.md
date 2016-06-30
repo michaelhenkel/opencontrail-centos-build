@@ -47,7 +47,4 @@ export sbtop=~/contrail/build/
 cd tools/packages/rpm/contrail
 rpmbuild -ba --define "_sbtop $sbtop" contrail.spec
 
-(for multicore compilation: 
-rpmbuild -ba --define "_sbtop $sbtop" --define “_jobs $NUMBER_OF_CORES” contrail.spec
-)
 ```
