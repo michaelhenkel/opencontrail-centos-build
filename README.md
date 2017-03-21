@@ -3,7 +3,7 @@
 ```
 export LC_ALL=C
 yum install -y epel-release
-yum install -y rpm-build scons git python-lxml wget gcc patch make unzip flex bison gcc-c++ openssl-devel autoconf automake vim python-devel python-setuptools protobuf protobuf-devel protobuf-compiler net-snmp-python bzip2 boost-devel tbb-devel  libcurl-devel libxml2-devel zlib-devel cppunit-devel cyrus-sasl-devel cyrus-sasl-lib openssl-devel  cyrus-sasl python-sphinx.noarch kernel-devel libpcap-devel libpcap libnl-devel ibnl3-devel
+yum install -y rpm-build scons git python-lxml wget gcc patch make unzip flex bison gcc-c++ openssl-devel autoconf automake vim python-devel python-setuptools protobuf protobuf-devel protobuf-compiler net-snmp-python bzip2 boost-devel tbb-devel  libcurl-devel libxml2-devel zlib-devel cppunit-devel cyrus-sasl-devel cyrus-sasl-lib openssl-devel  cyrus-sasl python-sphinx.noarch kernel-devel libpcap-devel libpcap libnl-devel libnl3-devel
 eval "$(ssh-agent -s)"
 ssh-add ${SSH_KEY:-"$HOME/.ssh/id_rsa"}
 wget --no-check-certificate -O /usr/bin/repo https://storage.googleapis.com/git-repo-downloads/repo
