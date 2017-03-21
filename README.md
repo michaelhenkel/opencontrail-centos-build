@@ -58,7 +58,7 @@ cd ..
 #cd ../tools/sandesh
 #git checkout 440c5a58ad09f613419e1ba67bdd0acb688d21bc
 export sbtop=~/contrail/build/
-cd ../packages/rpm/contrail
+cd ./tools/packages/rpm/contrail
 kver=`uname -a |awk '{print $3}'`
 sed -i "/3.10.0-327.10.1.el7.x86_64/ s/$/ $kver/" contrail.spec
 ln -s /usr/src/kernels/3.10.0-327.22.2.el7.x86_64 /usr/src/kernels/3.10.0-327.el7.x86_64 #check your kernel version in /usr/src/kernels
