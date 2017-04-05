@@ -79,3 +79,5 @@ JOBS=`nproc`
 SCONSFLAGS="-j $JOBS -Q debug=1" rpmbuild -ba --define "_sbtop $sbtop" contrail.spec
 
 ```
+
+Currently the build fails with depenency cycle errors in scons. The workaround is to use an older version of scons [2.1.0](https://sourceforge.net/projects/scons/files/scons/2.1.0/). And run the script again.
