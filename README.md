@@ -9,7 +9,7 @@ ssh-add ${SSH_KEY:-"$HOME/.ssh/id_rsa"}
 wget --no-check-certificate -O /usr/bin/repo https://storage.googleapis.com/git-repo-downloads/repo
 chmod +x /usr/bin/repo
 CONTRAIL_VNC_REPO=git@github.com:Juniper/contrail-vnc.git
-#CONTRAIL_BRANCH=R3.0
+CONTRAIL_BRANCH=R3.2
 mkdir -p ~/contrail/build/libs
 cd ~/contrail/build
 grep github ~/.ssh/known_hosts || ssh-keyscan github.com >> ~/.ssh/known_hosts
@@ -57,7 +57,10 @@ cd ..
 #git checkout 7b592db58b5cc6aba5524e032d151389d4183aec
 #cd ../tools/sandesh
 #git checkout 440c5a58ad09f613419e1ba67bdd0acb688d21bc
+for i in `grep -r sandesh-0.1de . |awk -F":" '{print $1}'`; do sed -i 's/sandesh-0.1dev/sandesh-0.1.dev/g' $i; done
 export sbtop=~/contrail/build/
+export srcVer=3.2.3
+export buildTag=1
 cd ./tools/packages/rpm/contrail
 kver=`uname -a |awk '{print $3}'`
 sed -i "/3.10.0-327.10.1.el7.x86_64/ s/$/ $kver/" contrail.spec
@@ -75,6 +78,6 @@ EOF
 sed -i "s#tools/packaging/common/control_files#tools/packages/rpm/contrail#g" contrail.spec
 sed -i "s#%{_distrorpmpkgdir}#%{_sbtop}/%{_distrorpmpkgdir}#g" contrail.spec  |grep _distrorpmpkgdir
 JOBS=`nproc`
-SCONSFLAGS="-j $JOBS -Q debug=1" rpmbuild -ba --define "_sbtop $sbtop" contrail.spec
+SCONSFLAGS="-j $JOBS -Q debug=1" rpmbuild -ba --define "_srcVer $srcVer" --define "_buildTag $buildTag" --define "_sbtop $sbtop" contrail.spec
 
 ```
